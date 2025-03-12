@@ -40,7 +40,7 @@ function App() {
     setIsSending(true);
 
     try {
-      const response = await fetch(`https://jesse-email-sender.vercel.app:${settings.port}/api/send-email`, {
+      const response = await fetch(`http://localhost:${settings.port}/api/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
