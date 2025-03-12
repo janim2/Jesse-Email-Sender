@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Mail, Loader2, Settings } from 'lucide-react';
+import { Send, Mail, Loader2, Settings, Clipboard } from 'lucide-react';
 import { Toaster, toast } from 'react-hot-toast';
 
 function App() {
@@ -13,6 +13,57 @@ function App() {
     emailPassword: '',
     port: '3000'
   });
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [templates, setTemplates] = useState([
+    {
+      name: 'Email Confirmation',
+      content: `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tr>
+            <td align="center">
+                <table width="600px" cellspacing="0" cellpadding="0" border="0" style="background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+                    <tr>
+                        <td align="center" style="padding: 20px 0;">
+                            <h2 style="color: #333;">Confirm Your Email</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #555; font-size: 16px; text-align: center; padding: 10px 20px;">
+                            Thank you for signing up! Please confirm your email address to continue using your ChatGPT account.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <a href="https://example.com/verify-email" 
+                               style="background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-size: 16px;">
+                               Confirm Email
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #777; font-size: 14px; text-align: center; padding: 10px 20px;">
+                            This confirmation link will be valid for the next 3 hours. If you did not request this, you can safely ignore this email.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #777; font-size: 12px; text-align: center; padding: 20px;">
+                            Need help? Visit our <a href="https://example.com/help-center" style="color: #007bff;">Help Center</a>.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`
+    }
+  ]);
 
   useEffect(() => {
     // Load saved settings from localStorage if they exist
@@ -94,6 +145,13 @@ function App() {
             <Settings className="mr-2 h-5 w-5" />
             {showSettings ? 'Hide Settings' : 'Show Settings'}
           </button>
+          <button
+            onClick={() => setShowTemplates(!showTemplates)}
+            className="mt-2 text-blue-600 hover:text-blue-700 flex items-center justify-center mx-auto"
+          >
+            <Clipboard className="mr-2 h-5 w-5" />
+            {showTemplates ? 'Hide Templates' : 'Show Templates'}
+          </button>
         </div>
 
         {showSettings && (
@@ -148,6 +206,25 @@ function App() {
               >
                 Save Settings
               </button>
+            </div>
+          </div>
+        )}
+
+        {showTemplates && (
+          <div className="mt-6 bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-medium mb-4">Email Templates</h3>
+            <div className="space-y-4">
+              {templates.map((template, index) => (
+                <div key={index} className="p-4 border rounded-lg">
+                  <h4 className="font-medium mb-2">{template.name}</h4>
+                  <button
+                    onClick={() => setMessage(template.content)}
+                    className="text-sm text-blue-600 hover:text-blue-700"
+                  >
+                    Use Template
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         )}
