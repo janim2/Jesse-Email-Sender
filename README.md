@@ -26,7 +26,7 @@ Jess Email Sender is a simple web-based application that allows users to send em
 5. Click **Send Emails** to dispatch your message.  
 
 ## **Installation & Deployment**  
-- Hosted at: [Link to where the app is uploaded]  
+- Hosted at: https://jesse-email-sender.vercel.app 
 - Requires a valid SMTP-enabled email account (e.g., Gmail, Outlook).  
 
 ## **Security Notice**  
