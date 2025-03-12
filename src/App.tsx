@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Send, Mail, Loader2, Settings } from 'lucide-react';
 import { Toaster, toast } from 'react-hot-toast';
-import { BASEURL } from './utils/constants';
 
 function App() {
   const [emails, setEmails] = useState('');
@@ -41,7 +40,7 @@ function App() {
     setIsSending(true);
 
     try {
-      const response = await fetch(`${BASEURL}:${settings.port}/api/send-email`, {
+      const response = await fetch(`https://jesse-email-sender.vercel.app:${settings.port}/api/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
